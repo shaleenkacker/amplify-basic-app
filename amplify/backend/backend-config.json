@@ -1,43 +1,61 @@
 {
   "api": {
-    "restapi": {
+    "amplifybasicapp": {
       "dependsOn": [
         {
           "attributes": [
-            "Name",
-            "Arn"
+            "UserPoolId"
           ],
-          "category": "function",
-          "resourceName": "amplifybasicappab8090e6"
+          "category": "auth",
+          "resourceName": "amplifybasicapp636aa05d"
         }
       ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authamplifybasicapp636aa05d"
+              }
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
       "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
+      "service": "AppSync"
     }
   },
-  "function": {
-    "amplifybasicappab8090e6": {
-      "build": true,
+  "auth": {
+    "amplifybasicapp636aa05d": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_amplifybasicappab8090e6_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "amplifybasicappab8090e6"
-        }
-      ]
-    },
-    "AMPLIFY_function_amplifybasicappab8090e6_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "amplifybasicappab8090e6"
-        }
-      ]
+      "service": "Cognito"
     }
   }
 }
