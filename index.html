@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompt Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* Ensures proper formatting of JSON response */
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>LLM Prompt Interface</h1>
+    <form id="promptForm">
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" required><br><br>
+        <label for="freeform_text">Enter your prompt:</label><br>
+        <textarea id="freeform_text" name="freeform_text" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Send</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('promptForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const language = document.getElementById('language').value;
+            const freeform_text = document.getElementById('freeform_text').value;
+            const apiUrl = 'https://mb430tkwy9.execute-api.us-east-1.amazonaws.com/prod/chatbot/'; // Replace with your API Gateway URL
+            
+            const requestData = {
+                language: language,
+                freeform_text: freeform_text
+            };
+    
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display response in 'response' element
+                document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+                alert(JSON.stringify(data, null, 2));
+            })
+            .catch(error => {
+                // Display error message if request fails
+                document.getElementById('response').innerText = 'Error: ' + error.message;
+            });
+        });
+    </script>
+    
+</body>
+</html>
