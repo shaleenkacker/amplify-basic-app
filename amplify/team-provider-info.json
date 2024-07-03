@@ -10,6 +10,17 @@
       "StackName": "amplify-amplifybasicapp-dev-ae648",
       "StackId": "arn:aws:cloudformation:us-east-1:654654371620:stack/amplify-amplifybasicapp-dev-ae648/497d0e30-393f-11ef-88c8-0affd4c66d19",
       "AmplifyAppId": "d1a14px7m4abb3"
+    },
+    "categories": {
+      "function": {
+        "amplifybasicappab8090e6": {
+          "deploymentBucketName": "amplify-amplifybasicapp-dev-ae648-deployment",
+          "s3Key": "amplify-builds/amplifybasicappab8090e6-427954756e5256502f4a-build.zip"
+        }
+      },
+      "api": {
+        "restapi": {}
+      }
     }
   }
 }
